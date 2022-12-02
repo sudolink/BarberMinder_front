@@ -1,0 +1,332 @@
+* {
+  margin:0;
+  padding:0;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+
+#root {
+  max-width: 1280px;
+  margin: 3rem auto 0 auto;
+  text-align: center;
+}
+
+.clockAndDateContainer{
+  margin-top:3rem;
+}
+
+.toolbar{
+  margin: 1rem auto 1rem auto;
+  display:flex;
+  height:40px;
+  width:120px;
+  justify-content: center;
+  border-radius:1rem;
+  background-color: pink;
+  overflow: hidden;
+}
+
+.pickerLogos {
+  width:30px;
+  height:30px;
+  transform: scaleX(-1);
+}
+
+.modePicker{
+  border: none;
+  width:60px;
+  min-height:40px;
+}
+
+.invertColors {
+  filter: invert(100%);
+}
+
+.activeMode {
+  background-color: rgba(255, 134, 21, 0.88);
+  color: white;
+}
+
+.cContainer {
+  border-radius: 5px;
+  display:flex;
+  justify-content: center;
+}
+
+.react-calendar {
+  border-radius: 0.5rem;
+  border: 2px solid rgba(255, 134, 21, 1)
+}
+.react-calendar__month-view__weekdays__weekday {
+  color:rgba(56, 56, 56, 1);
+  font-weight: bold;
+}
+.react-calendar__month-view__weekdays__weekday--weekend {
+  color:rgba(220, 55, 55, 1);
+  font-weight: bold;
+}
+
+.emphasisOrange {
+  color: rgba(255, 134, 21, 0.88);
+}
+
+.emphasis {
+  color: rgba(21, 251, 255, 0.88);
+}
+
+.cContainer {
+  max-width: 500px;
+}
+
+.highlight {
+  color:rgba(255, 134, 21, 1);
+}
+
+.react-calendar__tile:hover {
+  color:white;
+}
+
+.bigRing {
+  padding:0;
+  margin:auto;
+  margin-top:2rem;
+  height:330px;
+  width:330px;
+  border-radius: 50%;
+  position:relative;
+  background-color: rgba(56, 56, 56, 1);
+}
+
+.smallRing {
+  position:absolute;
+  left: calc(50% - 180px / 2);
+  top: calc(50% - 180px / 2);
+  border-radius: 50%;
+  height:180px;
+  width:180px;
+  background-color: rgba(255,255,255,0.1);
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hourDiv{
+  position:absolute;
+  left: calc(50% - 20px);
+  top: calc(50% - 20px);
+  color:black;
+}
+
+.hourDiv:hover{
+  color:white;
+}
+
+.hourText{
+  margin-top:21%;
+  text-align: center;
+}
+
+.minDiv {
+  position: absolute;
+  color:black;
+  left: calc(50% - 20px);
+  top: calc(50% - 20px);
+}
+
+.minDiv:hover{
+  color: white;
+}
+
+.minText {
+  margin-top:21%;
+  text-align:center;
+}
+
+.innerCirc {
+  position:absolute;
+  top:0;
+  height:40px;
+  width:40px;
+  background-color: white;
+  border-radius: 50%;
+  z-index: 0;
+}
+
+.innerCirc:hover {
+  background-color: rgba(24, 140, 142, 1);
+}
+
+.innerCircMinutes {
+  position: absolute;
+  background-color: white;
+  border-radius:50%;
+  width:40px;
+  height:40px;
+}
+.innerCircMinutes:hover{
+  background-color: rgba(24, 140, 142, 1);
+}
+
+.timeBox{
+  /* background-color: white; */
+  height:50px;
+}
+
+.timeSet {
+  margin-top:0.6rem;
+  font-size: 2.6rem;
+  font-weight:700;
+  /* color:rgba(21, 251, 255, 1); */
+  color: rgba(255, 134, 21, 1);
+  -webkit-animation: breathing 3s ease-out infinite normal;
+  animation: breathing 3s ease-in-out infinite normal;
+}
+
+.timeSet:hover {
+  cursor:pointer;
+  color:white;
+}
+
+@-webkit-keyframes breathing {
+
+  0% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+  50% {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+  }
+}
+
+@keyframes breathing {
+  0% {
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+  }
+
+  50% {
+    -webkit-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    transform: scale(1.1);
+  }
+}
+
+
+.deg-0 {
+  transform: rotate(1deg) translate(0,-160px) rotate(-1deg);
+}
+.deg-15 {
+  transform:rotate(16deg) translate(0,-160px) rotate(-16deg);
+}
+.deg-30 {
+  transform:rotate(31deg) translate(0,-160px) rotate(-31deg);
+}
+.deg-45 {
+  transform:rotate(46deg) translate(0,-160px) rotate(-46deg);
+}
+.deg-60 {
+  transform:rotate(61deg) translate(0,-160px) rotate(-61deg);
+}
+.deg-75 {
+  transform:rotate(76deg) translate(0,-160px) rotate(-76deg);
+}
+.deg-90 {
+  transform:rotate(91deg) translate(0,-160px) rotate(-91deg);
+}
+.deg-105 {
+  transform:rotate(106deg) translate(0,-160px) rotate(-106deg);
+}
+.deg-120 {
+  transform:rotate(121deg) translate(0,-160px) rotate(-121deg);
+}
+.deg-135 {
+  transform:rotate(136deg) translate(0,-160px) rotate(-136deg);
+}
+.deg-150 {
+  transform:rotate(151deg) translate(0,-160px) rotate(-151deg);
+}
+.deg-165 {
+  transform:rotate(166deg) translate(0,-160px) rotate(-166deg);
+}
+.deg-180 {
+  transform:rotate(181deg) translate(0,-160px) rotate(-181deg);
+}
+.deg-195 {
+  transform:rotate(196deg) translate(0,-160px) rotate(-196deg);
+}
+.deg-210 {
+  transform:rotate(211deg) translate(0,-160px) rotate(-211deg);
+}
+.deg-225 {
+  transform:rotate(226deg) translate(0,-160px) rotate(-226deg);
+}
+.deg-240 {
+  transform:rotate(241deg) translate(0,-160px) rotate(-241deg);
+}
+.deg-255 {
+  transform:rotate(256deg) translate(0,-160px) rotate(-256deg);
+}
+.deg-270 {
+  transform:rotate(271deg) translate(0,-160px) rotate(-271deg);
+}
+.deg-285 {
+  transform:rotate(286deg) translate(0,-160px) rotate(-286deg);
+}
+.deg-300 {
+  transform:rotate(301deg) translate(0,-160px) rotate(-301deg);
+}
+.deg-315 {
+  transform:rotate(316deg) translate(0,-160px) rotate(-316deg);
+}
+.deg-330 {
+  transform:rotate(331deg) translate(0,-160px) rotate(-331deg);
+}
+.deg-345 {
+  transform:rotate(346deg) translate(0,-160px) rotate(-346deg);
+}
+
+
+.deg-0-mins {
+  transform: translate(0,-90px);
+}
+.deg-30-mins {
+  transform: rotate(30deg) translate(0,-90px) rotate(-30deg);
+}
+.deg-60-mins {
+  transform: rotate(60deg) translate(0,-90px) rotate(-60deg);
+}
+.deg-90-mins {
+  transform: rotate(90deg) translate(0,-90px) rotate(-90deg);
+}
+.deg-120-mins {
+  transform: rotate(120deg) translate(0,-90px) rotate(-120deg);
+}
+.deg-150-mins {
+  transform: rotate(150deg) translate(0,-90px) rotate(-150deg);
+}
+.deg-180-mins {
+  transform: rotate(180deg) translate(0,-90px) rotate(-180deg);
+}
+.deg-210-mins {
+  transform: rotate(210deg) translate(0,-90px) rotate(-210deg);
+}
+.deg-240-mins {
+  transform: rotate(240deg) translate(0,-90px) rotate(-240deg);
+}
+.deg-270-mins {
+  transform: rotate(270deg) translate(0,-90px) rotate(-270deg);
+}
+.deg-300-mins {
+  transform: rotate(300deg) translate(0,-90px) rotate(-300deg);
+}
+.deg-330-mins {
+  transform: rotate(330deg) translate(0,-90px) rotate(-330deg);
+}
+
+.selectedBubble {
+  background-color: rgba(255, 134, 21, 1) !important;
+  /* background-color: rgb(0, 169, 172) !important; */
+  color: white;
+  z-index: 9;
+}
