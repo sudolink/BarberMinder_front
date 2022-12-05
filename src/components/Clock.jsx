@@ -1,9 +1,5 @@
 
 import {useState} from "react";export default function Clock(props){
-
-    //const[hoveredOver, setHoveredOver] = useState(null);
-    //console.log(hoveredOver)
-    //console.log(`${props.clock.minutes} -> ${Math.round((props.clock.minutes/5))*5}`)
     
     function handleHourClick(e,hours){
         props.onChange(prevClock => {
@@ -57,7 +53,7 @@ import {useState} from "react";export default function Clock(props){
                 {hrs}
                 <div className="smallRing">
                     <div className="timeBox">
-                        <p className="timeSet">
+                        <p className="timeSet" onClick={props.reportSelectedTime}>
                             {`${props.clock.hours.toLocaleString(undefined,{minimumIntegerDigits: 2})}:${roundedTo5Minutes.toLocaleString(undefined, {minimumIntegerDigits: 2})}`}
                         </p>
                     </div>
