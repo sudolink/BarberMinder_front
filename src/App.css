@@ -314,6 +314,12 @@
   width:100px;
 }
 
+.results {
+  margin-top:2rem;
+  padding:1rem;
+  background-color: rgba(255,255,255,0.1);
+}
+
 .deg-0 {
   transform: rotate(1deg) translate(0,-160px) rotate(-1deg);
 }

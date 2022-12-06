@@ -1,8 +1,6 @@
 import axios from "axios";
 import {useState, useRef, useEffect} from "react";
 
-const API_URL = import.meta.env.VITE_PROD_ENV == 'DEV' ? import.meta.env.VITE_BACKEND_URL_DEV : import.meta.env.VITE_BACKEND_URL_PROD;
-
 export default function CustSearch(props){
     const [search, setSearch] = useState("");
     const [results, setResults] = useState([]);
@@ -29,7 +27,11 @@ export default function CustSearch(props){
             if(search.length > 0){
                 axios.get(`/api/v1/getCustomer/`, {params: {name: search}})
                 .then(res => {
-                    setResults(res.data);
+                    if(res.data.length > 5){
+                        setResults(res.data.slice(0, 5))
+                    }else{
+                        setResults(res.data);
+                    }
                 })
                 .catch(err => {
                     setResults([]);
@@ -45,13 +47,31 @@ export default function CustSearch(props){
         <div className="custSearch">
             {/* <h2 style={{color:'orange', padding: '1rem'}}>no functionality or styling here yet, for now, at this moment in time, as we speak</h2> */}
             <form onSubmit={handleSubmit}>
-                <input className="searchInput" type="text" placeholder="Find customer" onChange={handleChange}/>
+                <input className="searchInput" type="text" placeholder="...start typing..." onChange={handleChange}/>
                 {/* <button type="submit">Search</button> */}
             </form>
             <div className="results">
-                {results.map((result, i) => {
-                    return <p key={i}>{result.name}</p>
-                })}
+                {
+                results.length > 0 ?
+                results.map((result, i) => {
+                    let name = result.name;
+                    let regex = new RegExp(search, "gi");
+                    //hightlight the search term in the results list
+                    let highlightedName = name.replace(regex, (match) => {
+                        return `<span class="highlight">${match}</span>`;
+                    });
+
+
+                    //onClick={() => props.setCustomer(result)
+                    return (
+                        <div key={i} className="result">
+                            <div className="customerName" dangerouslySetInnerHTML={{__html: highlightedName}}></div>
+                        </div>
+                    )
+                }) 
+                :
+                <div className="noResults">0 results</div>
+                }
             </div>
         </div>
     )
