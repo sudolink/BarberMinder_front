@@ -1,6 +1,19 @@
 
-import {useState} from "react";export default function Clock(props){
-    
+import {useState, useRef, useEffect} from "react";
+
+export default function Clock(props){
+    const [showTime, setShowTime] = useState(false);
+    const intervalRef = useRef();
+
+    useEffect(() => {
+        intervalRef.current = setInterval(() => {
+            setShowTime((prev) => !prev);
+        }, 3000)
+        return () => {
+            clearInterval(intervalRef.current);
+        }
+    },[]);
+
     function handleHourClick(e,hours){
         props.onChange(prevClock => {
             return {
@@ -53,8 +66,8 @@ import {useState} from "react";export default function Clock(props){
                 {hrs}
                 <div className="smallRing">
                     <div className="timeBox">
-                        <p className="timeSet" onClick={props.reportSelectedTime}>
-                            {`${props.clock.hours.toLocaleString(undefined,{minimumIntegerDigits: 2})}:${roundedTo5Minutes.toLocaleString(undefined, {minimumIntegerDigits: 2})}`}
+                        <p className={`${!showTime && 'confirmClockText'} timeSet`} onClick={props.setTimes}>
+                            { !showTime ? `confirm` : `${props.clock.hours.toLocaleString(undefined,{minimumIntegerDigits: 2})}:${roundedTo5Minutes.toLocaleString(undefined, {minimumIntegerDigits: 2})}`}
                         </p>
                     </div>
                 </div>

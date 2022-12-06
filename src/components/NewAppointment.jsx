@@ -1,10 +1,14 @@
+import {useState, useEffect} from "react";
 import DateSelected from "./DateSelected"
 import Calendar from "react-calendar"
 import Clock from "./Clock"
-import {useState, useEffect} from "react";
+import CustSearch from "./CustSearch";
+import addCustomerPNG from "../assets/plus.png"
+import findCustomerPNG from "../assets/magnifyingglass.png"
 
 export default function NewAppointment(props){   
 
+    const [selectedCustomerAction, setSelectedCustomerAction] = useState("find");
     const [date, setDate] = useState(() => {
         return new Date();
     })
@@ -23,7 +27,6 @@ export default function NewAppointment(props){
     })
 
     const [fullDate, setFullDate] = useState(null);
-    const [appoint, setAppoint] = useState(false);
 
     useEffect(() => {
         setFullDate(`${dateObj.day}/${dateObj.month}/${dateObj.year} @ ${clock.hours.toLocaleString(undefined, {minimumIntegerDigits: 2})}:${clock.minutes.toLocaleString(undefined, {minimumIntegerDigits: 2})}`)
@@ -39,35 +42,32 @@ export default function NewAppointment(props){
 
     function WrapperSetDate(dt){
         setDate(dt)
-        props.changeMode("clock")
-        
+        props.setSelectedMode("clock")
     }
 
-    function reportFullDate(){
-        console.log(fullDate);
-        setAppoint(true);
+    function WrapperSetTimes(){
+        props.setAppoint(true);
+        props.setSelectedMode("customer");
     }
-    
 
     return (
     <div id="AppointmentSettingDiv" className="newAppointment">
-        <DateSelected fullDateString={fullDate} appointing={appoint}/>
-        {!appoint && <div className={`clockAndDateContainer`}>
-            {props.dateOrClock == "date" && <div className="cContainer">
+        <DateSelected fullDateString={fullDate} appointing={props.appoint}/>
+        <div className={`AppointmentContainer`}>
+            {props.selectedMode == "date" && <div className="cContainer">
             <Calendar id={"calendarPick"} className={'activeComponent'} onChange={WrapperSetDate} date={date}/>
             </div>}
-            {props.dateOrClock == "clock" && <div className="clock">
-            <Clock id={"clockPick"} onChange={setClock} className={'activeComponent'} clock={clock} reportSelectedTime={reportFullDate}/>
+            {props.selectedMode == "clock" && <div className="clock">
+            <Clock id={"clockPick"} onChange={setClock} className={'activeComponent'} clock={clock} setTimes={WrapperSetTimes}/>
+            </div>}
+            {props.selectedMode == "customer" && <div className='appointCustomer'>
+                <div className='toolbar2'>
+                    <button onClick={() => setSelectedCustomerAction('find')} className={`custBtns findCustomer ${selectedCustomerAction == 'find' && 'activeMode'}`}><img className={'pickerLogos'} src={findCustomerPNG}/></button>
+                    <button onClick={() => setSelectedCustomerAction('add')} className={`custBtns newCustomer ${selectedCustomerAction == 'add' && 'activeMode'}`}><img className={`pickerLogos`} src={addCustomerPNG}/></button>
+                </div>
+                {selectedCustomerAction == 'find' && <CustSearch/>}
             </div>}
         </div>
-        }
-        {appoint &&
-        <div className='appointCustomer'>
-            <button className="custBtns newCustomer">New customer</button>
-            <button className="custBtns customerSearch">Search</button>
-        </div>
-        }
-            
-    </div>
+    </div>  
     )
 }
