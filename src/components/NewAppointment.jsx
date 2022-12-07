@@ -8,7 +8,7 @@ import findCustomerPNG from "../assets/magnifyingglass.png"
 
 export default function NewAppointment(props){   
 
-    const [selectedCustomerAction, setSelectedCustomerAction] = useState("find");
+    const [customer, setCustomer] = useState(null);
     const [date, setDate] = useState(() => {
         return new Date();
     })
@@ -46,27 +46,36 @@ export default function NewAppointment(props){
     }
 
     function WrapperSetTimes(){
-        props.setAppoint(true);
         props.setSelectedMode("customer");
     }
 
     return (
     <div id="AppointmentSettingDiv" className="newAppointment">
-        <DateSelected fullDateString={fullDate} appointing={props.appoint}/>
+        <DateSelected fullDateString={fullDate} selectedMode={props.selectedMode} customer={customer}/>
         <div className={`AppointmentContainer`}>
-            {props.selectedMode == "date" && <div className="cContainer">
-            <Calendar id={"calendarPick"} className={'activeComponent'} onChange={WrapperSetDate} date={date}/>
-            </div>}
-            {props.selectedMode == "clock" && <div className="clock">
-            <Clock id={"clockPick"} onChange={setClock} className={'activeComponent'} clock={clock} setTimes={WrapperSetTimes}/>
-            </div>}
-            {props.selectedMode == "customer" && <div className='appointCustomer'>
-                <div className='toolbar2'>
-                    <button onClick={() => setSelectedCustomerAction('find')} className={`custBtns findCustomer ${selectedCustomerAction == 'find' && 'activeMode'}`}><img className={'pickerLogos'} src={findCustomerPNG}/></button>
-                    <button onClick={() => setSelectedCustomerAction('add')} className={`custBtns newCustomer ${selectedCustomerAction == 'add' && 'activeMode'}`}><img className={`pickerLogos`} src={addCustomerPNG}/></button>
+            {props.selectedMode == "date" && 
+                <div className="cContainer">
+                    <Calendar id={"calendarPick"} className={'activeComponent'} onChange={WrapperSetDate} date={date}/>
                 </div>
-                {selectedCustomerAction == 'find' && <CustSearch/>}
-            </div>}
+            }
+            {props.selectedMode == "clock" && 
+                <div className="clock">
+                    <Clock id={"clockPick"} onChange={setClock} className={'activeComponent'} clock={clock} setTimes={WrapperSetTimes}/>
+                </div>
+            }
+            {props.selectedMode == "customer" && 
+                <div className={`appointCustomer ${customer != null && 'fullWidthAppointCustomer'}`}>
+                    {customer == null &&
+                        <CustSearch setCustomer={setCustomer} customer={customer}/>
+                    }
+                    {customer != null &&
+                        <div className="appointmentConfirm">
+                            <h4>Appointment with <span className="highlight text-larger">{customer.name}</span></h4>
+                            <button className="confirmAppointmentBtn" onClick={props.setAppointment}>Confirm</button>
+                        </div>
+                    }
+                </div>
+            }
         </div>
     </div>  
     )

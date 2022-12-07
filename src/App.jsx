@@ -9,7 +9,7 @@ import NewAppointment from "./components/NewAppointment"
 
 function App() {
   const [selectedMode, setSelectedMode] = useState('date')
-  const [appoint, setAppoint] = useState(false);
+  const [newAppointment, setNewAppointment] = useState(false);
 
   return (
     <div className="App">
@@ -21,7 +21,7 @@ function App() {
           <button onClick={() => setSelectedMode("customer")} className={`customerButton modePicker ${selectedMode == "customer" && "activeMode"}`}><img className={`pickerLogos ${selectedMode=="customer" && "invertColors"}`} src={PersonPNG} alt="Customer logo"/></button>
         </div>
       </div>
-      <NewAppointment selectedMode={selectedMode} setSelectedMode={setSelectedMode} appoint={appoint} setAppoint={setAppoint}/>
+      <NewAppointment selectedMode={selectedMode} setSelectedMode={setSelectedMode} setAppointment={setNewAppointment}/>
     </div>
   )
 }

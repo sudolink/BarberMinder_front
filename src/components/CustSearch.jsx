@@ -9,9 +9,7 @@ export default function CustSearch(props){
     function handleSubmit(e){
         e.preventDefault();
         console.log(search);
-        // fetch(`http://localhost:3001/api/custSearch/${search}`)
-        // .then(res => res.json())
-        // .then(data => setResults(data))
+
     }
 
 
@@ -43,12 +41,17 @@ export default function CustSearch(props){
         }, 200);
     }, [search])
 
+    function pickCustomer(customer){
+        setSearch("");
+        props.setCustomer(customer);
+        setResults([]);
+    }
+
     return (
         <div className="custSearch">
             {/* <h2 style={{color:'orange', padding: '1rem'}}>no functionality or styling here yet, for now, at this moment in time, as we speak</h2> */}
             <form onSubmit={handleSubmit}>
-                <input className="searchInput" type="text" placeholder="...start typing..." onChange={handleChange}/>
-                {/* <button type="submit">Search</button> */}
+                <input className="searchInput" type="text" placeholder="...start typing..." value={search} onChange={handleChange}/>
             </form>
             <div className="results">
                 {
@@ -65,12 +68,14 @@ export default function CustSearch(props){
                     //onClick={() => props.setCustomer(result)
                     return (
                         <div key={i} className="result">
-                            <div className="customerName" dangerouslySetInnerHTML={{__html: highlightedName}}></div>
+                            <button className="resultButtons" onClick={() => pickCustomer(result)}>
+                                <p className="customerName" dangerouslySetInnerHTML={{__html: highlightedName}}></p>
+                            </button>
                         </div>
                     )
                 }) 
                 :
-                <div className="noResults">0 results</div>
+                <div className="noResults">{props.customer == null && "0 results"}</div>
                 }
             </div>
         </div>
