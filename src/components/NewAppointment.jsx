@@ -3,8 +3,7 @@ import DateSelected from "./DateSelected"
 import Calendar from "react-calendar"
 import Clock from "./Clock"
 import CustSearch from "./CustSearch";
-import addCustomerPNG from "../assets/plus.png"
-import findCustomerPNG from "../assets/magnifyingglass.png"
+import resetCustomerPNG from "../assets/redoIcon.png"
 
 export default function NewAppointment(props){   
 
@@ -49,9 +48,18 @@ export default function NewAppointment(props){
         props.setSelectedMode("customer");
     }
 
+    function resetCustomer(){
+        setCustomer(null);
+    }
+
     return (
     <div id="AppointmentSettingDiv" className="newAppointment">
-        <DateSelected fullDateString={fullDate} selectedMode={props.selectedMode} customer={customer}/>
+        <DateSelected 
+            fullDateString={fullDate}
+            selectedMode={props.selectedMode}
+            customer={customer}
+            class={props.selectedMode != customer && customer != null && "" }
+        />
         <div className={`AppointmentContainer`}>
             {props.selectedMode == "date" && 
                 <div className="cContainer">
@@ -70,7 +78,15 @@ export default function NewAppointment(props){
                     }
                     {customer != null &&
                         <div className="appointmentConfirm">
-                            <h4>Appointment with <span className="highlight text-larger">{customer.name}</span></h4>
+                            <div className="appointmentDetails">
+                                <h3>appointment with <span className="customerNameDetails highlight text-larger">
+                                    {customer.name}
+                                    </span>
+                                </h3>
+                                <button className="resetCustomerBtn" onClick={resetCustomer}>
+                                    <img className="resetCustomerBtnImg" src={resetCustomerPNG} alt="Reset customer button"/>
+                                </button>
+                            </div>
                             <button className="confirmAppointmentBtn" onClick={props.setAppointment}>Confirm</button>
                         </div>
                     }
