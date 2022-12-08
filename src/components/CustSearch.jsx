@@ -9,7 +9,6 @@ export default function CustSearch(props){
     function handleSubmit(e){
         e.preventDefault();
         console.log(search);
-
     }
 
 
@@ -23,7 +22,7 @@ export default function CustSearch(props){
         timeoutId.current = setTimeout(() => {
             // Call the API here
             if(search.length > 0){
-                axios.get(`/api/v1/getCustomer/`, {params: {name: search}})
+                axios.get(`/api/v1/getCustomerLike/`, {params: {name: search}})
                 .then(res => {
                     if(res.data.length > 5){
                         setResults(res.data.slice(0, 5))
@@ -59,12 +58,10 @@ export default function CustSearch(props){
                 results.map((result, i) => {
                     let name = result.name;
                     let regex = new RegExp(search, "gi");
-                    //hightlight the search term in the results list
+                    //highlight the search term in the results list
                     let highlightedName = name.replace(regex, (match) => {
-                        return `<span class="highlight">${match}</span>`;
+                        return `<span class="searchHighlight">${match}</span>`;
                     });
-
-
                     //onClick={() => props.setCustomer(result)
                     return (
                         <div key={i} className="result">
@@ -75,7 +72,9 @@ export default function CustSearch(props){
                     )
                 }) 
                 :
-                <div className="noResults">{props.customer == null && "0 results"}</div>
+                <div className={`${"noResults"}`}>
+                    {props.customer == null && search != "" && "0 results"}
+                </div>
                 }
             </div>
         </div>

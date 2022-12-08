@@ -11,12 +11,14 @@ export default function NewAppointment(props){
     const [date, setDate] = useState(() => {
         return new Date();
     })
+    const [fullDate, setFullDate] = useState(null);
     const [clock, setClock] = useState(()=>{
-    return {
-        hours: date.getHours(),
-        minutes: date.getMinutes()
-    }
+        return {
+            hours: date.getHours(),
+            minutes: date.getMinutes()
+        }
     })
+
     const [dateObj, setDateObj] = useState(()=>{
     return {
         day: 0,
@@ -25,12 +27,6 @@ export default function NewAppointment(props){
         }
     })
 
-    const [fullDate, setFullDate] = useState(null);
-
-    useEffect(() => {
-        setFullDate(`${dateObj.day}/${dateObj.month}/${dateObj.year} @ ${clock.hours.toLocaleString(undefined, {minimumIntegerDigits: 2})}:${clock.minutes.toLocaleString(undefined, {minimumIntegerDigits: 2})}`)
-    }, [dateObj, clock])
-     
     useEffect(() => {
         setDateObj({
                 day: date.getDate(),
@@ -39,6 +35,12 @@ export default function NewAppointment(props){
         })
     }, [date])
 
+
+    useEffect(() => {
+        setFullDate(`${dateObj.day}/${dateObj.month}/${dateObj.year} @ ${clock.hours.toLocaleString(undefined, {minimumIntegerDigits: 2})}:${clock.minutes.toLocaleString(undefined, {minimumIntegerDigits: 2})}`)
+    }, [dateObj, clock])
+
+     
     function WrapperSetDate(dt){
         setDate(dt)
         props.setSelectedMode("clock")
@@ -52,23 +54,44 @@ export default function NewAppointment(props){
         setCustomer(null);
     }
 
+    function handleAppointment(e){
+        e.preventDefault();
+        resetCustomer();
+        props.setAppointment({customer: customer, time: {...dateObj, ...clock}})
+    }
+
     return (
     <div id="AppointmentSettingDiv" className="newAppointment">
+        {props.selectedMode != "todos" &&
         <DateSelected 
             fullDateString={fullDate}
             selectedMode={props.selectedMode}
             customer={customer}
             class={props.selectedMode != customer && customer != null && "" }
         />
+        }
         <div className={`AppointmentContainer`}>
             {props.selectedMode == "date" && 
                 <div className="cContainer">
-                    <Calendar id={"calendarPick"} className={'activeComponent'} onChange={WrapperSetDate} date={date}/>
+                    <Calendar
+                        id={"calendarPick"}
+                        className={'activeComponent'}
+                        onChange={WrapperSetDate}
+                        date={date}
+                        minDetail={"year"}
+                        minDate={new Date()}
+                    />
                 </div>
             }
             {props.selectedMode == "clock" && 
                 <div className="clock">
-                    <Clock id={"clockPick"} onChange={setClock} className={'activeComponent'} clock={clock} setTimes={WrapperSetTimes}/>
+                    <Clock id={"clockPick"}
+                        onChange={setClock}
+                        className={'activeComponent'}
+                        date={date}
+                        clock={clock} 
+                        setTimes={WrapperSetTimes}
+                    />
                 </div>
             }
             {props.selectedMode == "customer" && 
@@ -87,7 +110,7 @@ export default function NewAppointment(props){
                                     <img className="resetCustomerBtnImg" src={resetCustomerPNG} alt="Reset customer button"/>
                                 </button>
                             </div>
-                            <button className="confirmAppointmentBtn" onClick={props.setAppointment}>Confirm</button>
+                            <button className="confirmAppointmentBtn" onClick={(e) => handleAppointment(e)}>Confirm</button>
                         </div>
                     }
                 </div>
