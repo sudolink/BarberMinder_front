@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import 'react-calendar/dist/Calendar.css';
 import './App.css'
+import axios from "axios";
 import CalendarPNG from "./assets/calendar_ico.png";
 import ClockPNG from "./assets/clock_ico.png";
 import PersonPNG from "./assets/personpng.png";
@@ -11,9 +12,24 @@ import NewAppointment from "./components/NewAppointment"
 function App() {
   const [selectedMode, setSelectedMode] = useState('date')
   const [newAppointment, setNewAppointment] = useState(false);
+  const [appointmentStored, setAppointmentStored] = useState(false);
+
+  function appointmentToDatabase(appointmentObj){
+    axios.post('api/v1/makeAppointment',{},{params: {timestamp: appointmentObj.timestamp, customer_id: appointmentObj.customer_id}})
+    .then(res => {
+      console.log(res.data);
+      if(res.status == 200)
+      {
+        setAppointmentStored(true);
+      }
+    })
+    .catch(err => console.log(err))
+  }
 
   useEffect(() => {
-    console.log(newAppointment);
+    if(newAppointment != false){
+      appointmentToDatabase(newAppointment);
+    }
   }, [newAppointment])
 
   return (
@@ -27,6 +43,7 @@ function App() {
           <button onClick={() => setSelectedMode("todos")} className={`customerButton modePicker ${selectedMode == "todos" && "activeMode"}`}><img className={`pickerLogos ${selectedMode=="todos" && "invertColors"}`} src={TodoListPNG} alt="Todo List logo"/></button>
         </div>
       </div>
+      {appointmentStored && <div className="appointmentStored">Appointment stored!</div>}
       <NewAppointment selectedMode={selectedMode} setSelectedMode={setSelectedMode} setAppointment={setNewAppointment}/>
     </div>
   )

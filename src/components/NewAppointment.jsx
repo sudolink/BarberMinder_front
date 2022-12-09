@@ -57,7 +57,8 @@ export default function NewAppointment(props){
     function handleAppointment(e){
         e.preventDefault();
         resetCustomer();
-        props.setAppointment({customer: customer, time: {...dateObj, ...clock}})
+        let appointDate = new Date(dateObj.year, dateObj.month-1, dateObj.day, clock.hours, clock.minutes);
+        props.setAppointment({customer_id: customer.id, timestamp: appointDate.getTime() / 1000});
     }
 
     return (

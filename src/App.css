@@ -244,16 +244,6 @@
   color: black;
 }
 
-.react-calendar__tile--disabled {
-  color: lightgray!important;;
-  background-color: rgba(220, 55, 55, 0.07);
-  pointer-events: none;
-}
-
-.disabledText{
-  color: rgb(78, 78, 78)!important;
-}
-
 .disabledHourBubble{
   background-color: rgba(134, 134, 134, 0.8)!important;
   pointer-events: none;
