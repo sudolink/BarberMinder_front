@@ -10,6 +10,10 @@
   text-align: center;
 }
 
+.App {
+  position: relative;
+}
+
 .testDiv{
   height:30px;
   width:30px;
@@ -46,6 +50,75 @@
   }
 }
 
+.appointmentsHeading {
+  font-size: 1.5rem;
+  color: rgba(255, 134, 21, 1);
+  text-decoration: underline;
+  margin: 0rem 0.4rem;
+}
+
+.appointments {
+  display:flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem auto 1rem auto;
+  height: 60vh;
+  overflow: scroll;
+}
+.appointments::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+.weeklyAppointments {
+  background-color: rgba(134, 134, 134, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 0 1rem;
+}
+
+.dailyAppointments {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin:1rem;
+}
+
+.dailyAppointmentsList {
+  margin-top:1rem;
+  border-top: 1px dashed rgba(255, 255, 255, 0.1);
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+
+}
+
+.dayHeadingContainer{
+  display:flex;
+  /* border-bottom: 1px solid rgba(255, 134, 21, 0.2); */
+}
+
+.dayHeadingApptCount {
+}
+
+.dayHeading {
+  margin: 0rem auto 0.4rem 0.5rem;
+  /* background-color: rgba(134, 134, 134, 0.1); */
+}
+
+.appointment {
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0.5rem 1rem;
+}
+
+.apptBtns {
+  padding:0.2rem;
+}
+
 .AppointmentContainer{
   display:flex;
   flex-direction: column;
@@ -54,6 +127,16 @@
   margin: 0.5rem auto 1rem auto;
   width: 100%;
   height: 100%;
+}
+
+.appointmentStored{
+  position: absolute;
+  bottom:-2rem;
+  left: 0;
+  margin-left:auto;
+  margin-right:auto;
+  width: 100%;
+  animation: fadeOut 2s ease-out normal;
 }
 
 .appointCustomer {
@@ -127,13 +210,17 @@
 }
 
 .toolbar{
-  margin: 1rem auto 3rem auto;
+  position: relative;
+  margin: 1rem auto 2rem auto;
   display:flex;
-  height:40px;
-  width:240px;
   justify-content: center;
+}
+
+.setAppointmentTime{
   border-radius:1rem;
   background-color: pink;
+  height:40px;
+  width:240px;
   overflow: hidden;
 }
 
@@ -156,9 +243,6 @@
 
 .clockInvert{
   transform: scaleX(-1);
-}
-
-.setAppointmentTime{
 }
 
 .modePicker{

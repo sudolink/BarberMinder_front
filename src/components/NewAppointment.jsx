@@ -50,6 +50,16 @@ export default function NewAppointment(props){
         props.setSelectedMode("customer");
     }
 
+    function wrapperResetDateAndTime(){
+        setDate(new Date());
+        setClock(
+            {
+                hours: new Date().getHours(),
+                minutes: new Date().getMinutes()
+            }
+        );
+    }
+
     function resetCustomer(){
         setCustomer(null);
     }
@@ -59,6 +69,7 @@ export default function NewAppointment(props){
         resetCustomer();
         let appointDate = new Date(dateObj.year, dateObj.month-1, dateObj.day, clock.hours, clock.minutes);
         props.setAppointment({customer_id: customer.id, timestamp: appointDate.getTime() / 1000});
+        wrapperResetDateAndTime();
     }
 
     return (

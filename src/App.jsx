@@ -7,6 +7,7 @@ import ClockPNG from "./assets/clock_ico.png";
 import PersonPNG from "./assets/personpng.png";
 import TodoListPNG from "./assets/list_icon.png";
 import NewAppointment from "./components/NewAppointment"
+import FutureAppointments from "./components/FutureAppointments"
 
 
 function App() {
@@ -27,6 +28,15 @@ function App() {
   }
 
   useEffect(() => {
+    if(appointmentStored){
+
+      setTimeout(() => {
+        setAppointmentStored(false);
+      }, 1900);
+    }
+  }, [appointmentStored])
+
+  useEffect(() => {
     if(newAppointment != false){
       appointmentToDatabase(newAppointment);
     }
@@ -42,9 +52,10 @@ function App() {
           <button onClick={() => setSelectedMode("customer")} className={`customerButton modePicker ${selectedMode == "customer" && "activeMode"}`}><img className={`pickerLogos ${selectedMode=="customer" && "invertColors"}`} src={PersonPNG} alt="Customer logo"/></button>
           <button onClick={() => setSelectedMode("todos")} className={`customerButton modePicker ${selectedMode == "todos" && "activeMode"}`}><img className={`pickerLogos ${selectedMode=="todos" && "invertColors"}`} src={TodoListPNG} alt="Todo List logo"/></button>
         </div>
+        {appointmentStored && <div className="appointmentStored"><h3>Appointment stored!</h3></div>}
       </div>
-      {appointmentStored && <div className="appointmentStored">Appointment stored!</div>}
       <NewAppointment selectedMode={selectedMode} setSelectedMode={setSelectedMode} setAppointment={setNewAppointment}/>
+      {selectedMode == "todos" && <FutureAppointments/>}
     </div>
   )
 }
