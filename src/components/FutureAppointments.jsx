@@ -27,7 +27,7 @@ export default function FutureAppointments(props){
         let end = new Date(todayDate);
         start.setDate(start.getDate() - today);
         end.setDate(end.getDate() + (6 - today));
-        console.log(start, end)
+        // console.log(start, end)
         return [start, end];
     }
 
@@ -37,7 +37,7 @@ export default function FutureAppointments(props){
         <div className="futureAppointments">
             <h2 className="appointmentsHeading">Appointments:</h2>
             <div className="appointments">
-                <WeeklyAppointments appointments={appointments} todayDate={todayDate} weekStart ={weekStart} weekEnd={weekEnd} />
+                <WeeklyAppointments appointments={appointments} todayDate={todayDate} weekStart ={weekStart} weekEnd={weekEnd} weekNum={0}/>
             </div>
         </div>
     )
