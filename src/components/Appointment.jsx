@@ -14,28 +14,28 @@ export default function Appointment(props){
 
     const date = new Date(appointment.time * 1000);
     const dateObj = {
-        day: date.getDate(),
+        day: date.getDate(),    
         month: date.getMonth()+1,
         year: date.getFullYear(),
         hour: date.getHours(),
         minutes: date.getMinutes()
     }
-    const dateString = `${dateObj.day}/${dateObj.month}/${dateObj.year.toString().slice(2)} ${dateObj.hour.toLocaleString(undefined, {minimumIntegerDigits: 2})}:${dateObj.minutes.toLocaleString(undefined, {minimumIntegerDigits: 2})}`
-
+    const dateString = `${dateObj.day}/${dateObj.month}/${dateObj.year.toString().slice(2)}`
+    const hourString = `${dateObj.hour.toLocaleString(undefined, {minimumIntegerDigits: 2})}:${dateObj.minutes.toLocaleString(undefined, {minimumIntegerDigits: 2})}` 
     return (
         <div className="appointment">
             <div className="appointmentInfo">
-                <div className="appointmentCustomer">
-                    <h4>{appointment.customer.name}</h4>
-                </div>
                 <div className="appointmentDate">
-                    <h5>{`${dateString}`}</h5>
+                    <h5>{`${hourString}`}</h5>
                 </div>
+                {appointment.customer != null && <div className="appointmentCustomer">
+                    <h4>{appointment.customer.name}</h4>
+                </div>}
             </div>
-            <div className="appointmentButtons">
-                <button className="apptBtns" onClick={() => props.setAppointment(appointment)}>Edit</button>
+            {appointment.customer != null && <div className="appointmentButtons">
+                <button className="apptBtns" onClick={() => props.editAppointment(appointment)}>Edit</button>
                 <button className="apptBtns" onClick={() => props.deleteAppointment(appointment.id)}>Delete</button>
-            </div>
+            </div>}
         </div>
     )
 }

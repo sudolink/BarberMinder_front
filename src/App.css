@@ -77,15 +77,17 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
-  padding: 0 0rem;
+  padding: 0 0rem;  
   position: relative;
   border-bottom: 1;
-  margin-top:1rem;
+  margin-top:2rem;
 }
 
 .weekHeading {
   /* background-color: rgba(24, 140, 142, 0.1); */
+  background-color: rgba(134, 134, 134, 0.1);
   padding: 1rem;
+  margin-bottom:1rem;
   width: 100%;
   border: 2px solid rgba(255, 255, 255, 0.4);
 }
@@ -94,7 +96,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  margin:0.5rem;
+  margin: 0.1rem 0.5rem;
   position: relative;
 }
 
@@ -113,22 +115,27 @@
 }
 
 .dayHeading {
-  color:rgba(134, 134, 134, 0.7);
-  margin: 0rem auto 0.4rem 0.5rem;
+  margin: 0rem 2rem 0.4rem 0.5rem;
 }
 
 .dhdate {
+  font-size: 0.8rem;
+}
 
+.dhText{
+  font-size: 0.5rem;
+  color: rgba(255,255,255,0.2);
+  margin-right:auto;
 }
 
 .dhday {
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   color: rgba(255,255,255,0.2);
-  margin-right:1rem;
+  margin-right: 1rem;
 }
 
 .dayHeadingHighlighted{
-  background-color: rgba(255, 134, 21, 0.7);
+  background-color: rgba(255, 255,255, 0.2);
 }
 
 .dayHeadingOverlay{
@@ -154,16 +161,35 @@
 .futureAppointments{
   margin: 0 auto;
   width:70vw;
+  max-width: 600px;
   min-width:250px;
 }
 
 
 .appointment {
   display:flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   margin: 0.5rem 1rem;
+}
+
+.appointmentInfo {
+  display:flex;
+}
+
+.appointmentDate{
+  margin: 0 1rem;
+}
+
+.appointmentCustomer {
+  margin: 0 2rem;
+  color: rgba(255, 134, 21, 1)
+}
+.appointmentButtons{
+  margin: 0 0rem 0 auto;
+}
+.apptBtns {
+  background-color: transparent;
+  border: none;
+  color:rgba(24, 140, 142, 1);
 }
 
 .apptBtns {
