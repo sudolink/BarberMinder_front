@@ -55,19 +55,19 @@ export default function DailyAppointments(props){
         return textString;
     }
 
-    const dailyAppointments = []
-    for(let i = 0; i < 24 * 12 * 5; i+=5){ //24 hours * 12 slots per hour (every 5 minutes)
-        let tempDate = new Date(props.dayDate);
-        tempDate.setHours(0,i,0,0)
-        let tempDateTime = tempDate.getTime() / 1000;
-        let tempApptObj = {
-            time: tempDateTime,
-            customer: null
-        }
-        let foundAppointment = props.appointments.find(appointment => appointment.time === tempDateTime);
-        let tempAppt = foundAppointment ? <Appointment appointment={foundAppointment} key={i} id={`day_${props.dayDate.getDate()}_hour_${tempDate.getHours()}_mins_${tempDate.getMinutes()}`}/> : <Appointment appointment={tempApptObj} key={i} id={`day_${props.dayDate.getDate()}_hour_${tempDate.getHours()}_mins_${tempDate.getMinutes()}`}/>
-        dailyAppointments.push(tempAppt);
-    }
+    // const dailyAppointments = []
+    // for(let i = 0; i < 24 * 12 * 5; i+=5){ //24 hours * 12 slots per hour (every 5 minutes)
+    //     let tempDate = new Date(props.dayDate);
+    //     tempDate.setHours(0,i,0,0)
+    //     let tempDateTime = tempDate.getTime() / 1000;
+    //     let tempApptObj = {
+    //         time: tempDateTime,
+    //         customer: null
+    //     }
+    //     let foundAppointment = props.appointments.find(appointment => appointment.time === tempDateTime);
+    //     let tempAppt = foundAppointment ? <Appointment appointment={foundAppointment} key={i} id={`day_${props.dayDate.getDate()}_hour_${tempDate.getHours()}_mins_${tempDate.getMinutes()}`}/> : <Appointment appointment={tempApptObj} key={i} id={`day_${props.dayDate.getDate()}_hour_${tempDate.getHours()}_mins_${tempDate.getMinutes()}`}/>
+    //     dailyAppointments.push(tempAppt);
+    // }
 
     //next thing to do, instead of rendering each unscheduled 5-minute step in the day,
     //is to render blocks of unscheduled appointments as a single appointment showing the time-range of the block, and saying "unscheduled" or something
@@ -83,14 +83,14 @@ export default function DailyAppointments(props){
                 <h4 className="numberOfAppointments">{`${props.appointments?.length < 1 ? "0" : props.appointments.length }`}</h4><h4 className="numberOfAppointmentsX">x</h4>
                 {clickOverlay}
             </div>
-            {/* {!collapsed && props.appointments.length > 0 && <div className="dailyAppointmentsList">
+            {!collapsed && props.appointments.length > 0 && <div className="dailyAppointmentsList">
                 {props.appointments.map((appointment, index) => {
                     return <Appointment appointment={appointment} key={index} />
                 })}
-            </div>} */}
-            {!collapsed && props.appointments.length > 0 && <div className="dailyAppointmentsList">
-                {dailyAppointments}
             </div>}
+            {/* {!collapsed && props.appointments.length > 0 && <div className="dailyAppointmentsList">
+                {dailyAppointments}
+            </div>} */}
         </div>
     )
 }

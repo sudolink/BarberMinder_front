@@ -176,12 +176,13 @@
 }
 
 .appointmentDate{
+  color:orange;
   margin: 0 1rem;
 }
 
 .appointmentCustomer {
-  margin: 0 2rem;
-  color: rgba(255, 134, 21, 1)
+  margin: 0 1rem;
+  /* color: rgba(255, 134, 21, 1) */
 }
 .appointmentButtons{
   margin: 0 0rem 0 auto;
@@ -189,11 +190,14 @@
 .apptBtns {
   background-color: transparent;
   border: none;
-  color:rgba(24, 140, 142, 1);
+  color:white;
+  padding: 0.2rem 0.4rem;
 }
 
-.apptBtns {
-  padding:0.2rem;
+.apptBtns:hover{
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.2);
+  color:rgb(42, 251, 255);
 }
 
 .AppointmentContainer{
@@ -220,7 +224,6 @@
   display:flex;
   justify-content: center;
   /* background-color: rgba(255,255,255,0.05); */
-  border-radius: 0.5rem;
 }
 
 .fullWidthAppointCustomer {
@@ -310,17 +313,6 @@
   overflow: hidden;
 }
 
-.toolbar2{
-  margin: 1rem auto 1rem auto;
-  display:flex;
-  height:40px;
-  width:100px;
-  justify-content: center;
-  border-radius:1rem;
-  background-color: pink;
-  overflow: hidden;
-}
-
 .pickerLogos {
   width:30px;
   height:30px;
@@ -346,6 +338,15 @@
   color: white;
 }
 
+.customerForm {
+  display:flex;
+  flex-direction: column;
+}
+
+.custSearch {
+  position:relative;
+}
+
 .searchInput {
   margin-top:1rem;
   text-align: center;
@@ -358,6 +359,21 @@
 .searchInput:focus {
   outline: 1px solid rgba(255, 134, 21, 0.88);
   animation: pulsate 3s ease-in infinite;
+}
+
+.customerModeBtn{
+  position:absolute;
+  background: transparent;
+  border: none;
+  color:white;
+  font-size: 0.8rem;
+  cursor: pointer;
+  right:0;
+  margin: 0.5rem 0;
+}
+
+.customerModeBtn:hover{
+  color:rgba(255, 134, 21, 1);
 }
 
 @keyframes pulsate {

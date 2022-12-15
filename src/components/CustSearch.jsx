@@ -4,6 +4,12 @@ import {useState, useRef, useEffect} from "react";
 export default function CustSearch(props){
     const [search, setSearch] = useState("");
     const [results, setResults] = useState([]);
+    const [customerMode, setCustomerMode] = useState(false); //false == search, true == new customer
+    const [newCustomer, setNewCustomer] = useState({
+        name: "",
+        phone: "",
+        email: ""
+    });
     const timeoutId = useRef(null);
 
     function handleSubmit(e){
@@ -11,34 +17,37 @@ export default function CustSearch(props){
         console.log(search);
     }
 
-
     function handleChange(event) {
         setSearch(event.target.value);
     }
 
     useEffect(() => {
-        clearTimeout(timeoutId.current);
-        // Debounce the API call for 200ms
-        timeoutId.current = setTimeout(() => {
-            // Call the API here
-            if(search.length > 0){
-                axios.get(`/api/v1/getCustomerLike/`, {params: {name: search}})
-                .then(res => {
-                    if(res.data.length > 5){
-                        setResults(res.data.slice(0, 5))
-                    }else{
-                        setResults(res.data);
-                    }
-                })
-                .catch(err => {
+        if(customerMode){
+
+        }else{
+            clearTimeout(timeoutId.current);
+            // Debounce the API call for 200ms
+            timeoutId.current = setTimeout(() => {
+                // Call the API here
+                if(search.length > 0){
+                    axios.get(`/api/v1/getCustomerLike/`, {params: {name: search}})
+                    .then(res => {
+                        if(res.data.length > 5){
+                            setResults(res.data.slice(0, 5))
+                        }else{
+                            setResults(res.data);
+                        }
+                    })
+                    .catch(err => {
+                        setResults([]);
+                        console.log(err.response)
+                    });
+                }else{
                     setResults([]);
-                    console.log(err.response)
-                });
-            }else{
-                setResults([]);
-            }
-        }, 200);
-    }, [search])
+                }
+            }, 200);
+        }
+    }, [search, customerMode])
 
     function pickCustomer(customer){
         setSearch("");
@@ -46,13 +55,24 @@ export default function CustSearch(props){
         setResults([]);
     }
 
+    function handleCustomerMode(){
+        setCustomerMode(!customerMode);
+    }
+
     return (
         <div className="custSearch">
             {/* <h2 style={{color:'orange', padding: '1rem'}}>no functionality or styling here yet, for now, at this moment in time, as we speak</h2> */}
-            <form onSubmit={handleSubmit}>
+            <form className="customerForm" onSubmit={handleSubmit}>
                 <input className="searchInput" type="text" placeholder="...start typing..." value={search} onChange={handleChange}/>
+                {
+                    customerMode && <input className="phoneInput searchInput" type="text" placeholder="phone number" value={newCustomer ? newCustomer.phone : ""} onChange={(e) => setNewCustomer({...newCustomer, phone: e.target.value})}/>
+                }
+                {
+                    customerMode && <input className="emailInput searchInput" type="text" placeholder="email" value={newCustomer ? newCustomer.email : ""} onChange={(e) => setNewCustomer({...newCustomer, email: e.target.value})}/>
+                }
             </form>
-            <div className="results">
+            <button className="customerModeBtn" onClick={handleCustomerMode}>{customerMode ? "search?" : "new customer?"}</button>
+            {!customerMode && <div className="results">
                 {
                 results.length > 0 ?
                 results.map((result, i) => {
@@ -77,6 +97,7 @@ export default function CustSearch(props){
                 </div>
                 }
             </div>
+            }
         </div>
     )
 }
