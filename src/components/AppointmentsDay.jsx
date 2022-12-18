@@ -85,7 +85,7 @@ export default function DailyAppointments(props){
             </div>
             {!collapsed && props.appointments.length > 0 && <div className="dailyAppointmentsList">
                 {props.appointments.map((appointment, index) => {
-                    return <Appointment appointment={appointment} key={index} />
+                    return <Appointment appointment={appointment} key={index} apptFuncs={props.apptFuncs}/>
                 })}
             </div>}
             {/* {!collapsed && props.appointments.length > 0 && <div className="dailyAppointmentsList">

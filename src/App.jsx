@@ -14,6 +14,7 @@ function App() {
   const [selectedMode, setSelectedMode] = useState('date')
   const [newAppointment, setNewAppointment] = useState(false);
   const [appointmentStored, setAppointmentStored] = useState(false);
+  const [updateAppointments, setUpdateAppointments] = useState(false);
 
   function appointmentToDatabase(appointmentObj){
     axios.post('api/v1/makeAppointment',{},{params: {timestamp: appointmentObj.timestamp, customer_id: appointmentObj.customer_id}})
@@ -25,6 +26,22 @@ function App() {
       }
     })
     .catch(err => console.log(err))
+  }
+
+  function deleteAppointment(appointmentId){
+    console.log(`Appointment ${appointmentId} deleted`)
+    axios.post('api/v1/deleteAppointment', {}, {params: {appointment_id: appointmentId}})
+    .then(res => {
+      console.log(res.data);
+      if(res.status == 200)
+      {
+        setUpdateAppointments(!updateAppointments);
+      }
+    })
+  }
+
+  function editAppointment(appointmentId){
+    console.log(`editing appointment ${appointmentId}`)
   }
 
   useEffect(() => {
@@ -55,7 +72,7 @@ function App() {
         {appointmentStored && <div className="appointmentStored"><h3>Appointment stored!</h3></div>}
       </div>
       <NewAppointment selectedMode={selectedMode} setSelectedMode={setSelectedMode} setAppointment={setNewAppointment}/>
-      {selectedMode == "todos" && <FutureAppointments/>}
+      {selectedMode == "todos" && <FutureAppointments apptFuncs = {[deleteAppointment,editAppointment]} update={updateAppointments}/>}
     </div>
   )
 }

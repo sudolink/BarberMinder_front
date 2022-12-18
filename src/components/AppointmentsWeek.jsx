@@ -17,7 +17,16 @@ export default function WeeklyAppointments(props){
             {fullWeek.map((day, index) => {
                 let tempDate = new Date(dayDate);
                 tempDate.setDate(tempDate.getDate() + index);
-                let tempComp = <DailyAppointments appointments={props.appointments.filter(appointment => new Date(appointment.time * 1000).getDay() === index)} dayDate={tempDate} scrollTo={props.scrollTo} day={day} key={index} id={`week_${props.weekNum}_day_${index}`}/>
+                let tempComp = 
+                <DailyAppointments 
+                    appointments={props.appointments.filter(appointment => new Date(appointment.time * 1000).getDay() === index)} 
+                    dayDate={tempDate} 
+                    scrollTo={props.scrollTo} 
+                    day={day} 
+                    key={index}
+                    id={`week_${props.weekNum}_day_${index}`}
+                    apptFuncs = {props.apptFuncs}
+                    />
                 return tempComp
            })}
         </div>
