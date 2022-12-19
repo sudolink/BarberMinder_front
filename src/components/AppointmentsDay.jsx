@@ -2,14 +2,16 @@ import {useEffect, useState, useRef} from "react";
 import Appointment from "./Appointment";
 
 export default function DailyAppointments(props){
-    const [collapsed, setCollapsed] = useState(true);
+    const [collapsed, setCollapsed] = useState(() => {
+        return !props.collapsed || true;
+    });
+    
     function handleClick(e){
         setCollapsed(!collapsed);
         props.scrollTo(e.target);
     }
 
     const clickOverlay = <div onClick={handleClick} className="dayHeadingOverlay"></div>
-    const dailyDivRef = useRef();
 
     useEffect(()=>{
         if(collapsed){
@@ -23,7 +25,9 @@ export default function DailyAppointments(props){
         if(props.dayDate.getDate() == new Date().getDate()){
             console.log(`scrolling to element id: '${props.id}' (${props.dayDate.getDate()}.${props.dayDate.getMonth()+1}.${props.dayDate.getFullYear()})`)
             props.scrollTo(prevElement => {
-                return prevElement != undefined ? prevElement : dailyDivRef.current; //if prevElement is undefined, set it to the current element, else keep prevElement
+                let tempElement = document.getElementById(props.id);
+                // console.log("prev:",prevElement, "element:",tempElement)
+                return prevElement != undefined ? prevElement : tempElement; //if prevElement is defined, set it to the current element, else keep prevElement
             })
         }
     },[])
@@ -75,7 +79,7 @@ export default function DailyAppointments(props){
 
 
     return(
-        <div ref={dailyDivRef} className="dailyAppointments" id={props.id}>
+        <div className="dailyAppointments" id={props.id}>
             <div className={`dayHeadingContainer ${!collapsed && props.appointments.length > 0 && "dayHeadingHighlighted"}`}>
                 <h4 className="dayHeading dhdate">{`${props.dayDate.getDate()}.${props.dayDate.getMonth()+1}.${props.dayDate.getFullYear().toString().slice(2)}`}</h4>
                 <h5 className="dhText">{dateText()}</h5>
@@ -83,14 +87,13 @@ export default function DailyAppointments(props){
                 <h4 className="numberOfAppointments">{`${props.appointments?.length < 1 ? "0" : props.appointments.length }`}</h4><h4 className="numberOfAppointmentsX">x</h4>
                 {clickOverlay}
             </div>
-            {!collapsed && props.appointments.length > 0 && <div className="dailyAppointmentsList">
+            {
+            !collapsed && props.appointments.length > 0 && <div className="dailyAppointmentsList">
                 {props.appointments.map((appointment, index) => {
-                    return <Appointment appointment={appointment} key={index} apptFuncs={props.apptFuncs}/>
+                    return <Appointment appointment={appointment} key={index} setUpdate={props.setUpdate} scrollTo={props.scrollTo}/>
                 })}
-            </div>}
-            {/* {!collapsed && props.appointments.length > 0 && <div className="dailyAppointmentsList">
-                {dailyAppointments}
-            </div>} */}
+            </div>
+            }
         </div>
     )
 }

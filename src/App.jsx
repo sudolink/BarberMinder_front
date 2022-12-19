@@ -1,20 +1,21 @@
 import { useState, useEffect } from 'react';
 import 'react-calendar/dist/Calendar.css';
-import './App.css'
+import './App.css';
 import axios from "axios";
 import CalendarPNG from "./assets/calendar_ico.png";
 import ClockPNG from "./assets/clock_ico.png";
 import PersonPNG from "./assets/personpng.png";
 import TodoListPNG from "./assets/list_icon.png";
-import NewAppointment from "./components/NewAppointment"
-import FutureAppointments from "./components/FutureAppointments"
+import NewAppointment from "./components/NewAppointment";
+import FutureAppointments from "./components/FutureAppointments";
+import Issues from "./components/Issues";
 
 
 function App() {
+  const [showIssues, setShowIssues] = useState(false);
   const [selectedMode, setSelectedMode] = useState('date')
   const [newAppointment, setNewAppointment] = useState(false);
   const [appointmentStored, setAppointmentStored] = useState(false);
-  const [updateAppointments, setUpdateAppointments] = useState(false);
 
   function appointmentToDatabase(appointmentObj){
     axios.post('api/v1/makeAppointment',{},{params: {timestamp: appointmentObj.timestamp, customer_id: appointmentObj.customer_id}})
@@ -25,23 +26,12 @@ function App() {
         setAppointmentStored(true);
       }
     })
-    .catch(err => console.log(err))
-  }
-
-  function deleteAppointment(appointmentId){
-    console.log(`Appointment ${appointmentId} deleted`)
-    axios.post('api/v1/deleteAppointment', {}, {params: {appointment_id: appointmentId}})
-    .then(res => {
-      console.log(res.data);
-      if(res.status == 200)
-      {
-        setUpdateAppointments(!updateAppointments);
+    .catch(err => {
+      if(err.response.status == 500){
+        console.log(`Appointment already exists! ${err.response.data.code}: ${err.response.data.sqlMessage}`);
       }
+      console.log(err)
     })
-  }
-
-  function editAppointment(appointmentId){
-    console.log(`editing appointment ${appointmentId}`)
   }
 
   useEffect(() => {
@@ -61,6 +51,8 @@ function App() {
 
   return (
     <div className="App">
+      {showIssues && <Issues/>}
+      <button onClick={() => setShowIssues(!showIssues)} className="issuesButton">Issues</button>
       <h1><span className="emphasis">B</span>arber<span className="emphasis">m</span>inder</h1>
       <div className={`toolbar`}>
         <div className="setAppointmentTime">
@@ -72,7 +64,7 @@ function App() {
         {appointmentStored && <div className="appointmentStored"><h3>Appointment stored!</h3></div>}
       </div>
       <NewAppointment selectedMode={selectedMode} setSelectedMode={setSelectedMode} setAppointment={setNewAppointment}/>
-      {selectedMode == "todos" && <FutureAppointments apptFuncs = {[deleteAppointment,editAppointment]} update={updateAppointments}/>}
+      {selectedMode == "todos" && <FutureAppointments/>}
     </div>
   )
 }

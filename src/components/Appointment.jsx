@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
+import axios from "axios";
 //example of an incoming appointment object:
 // {
 //     "time": 1671058500,
@@ -16,7 +17,7 @@ export default function Appointment(props){
     const [deletePrompt, setDeletePrompt] = useState(false);
     const [deleteSuccess, setDeleteSuccess] = useState(false);
     const [deleteConfirmed, setDeleteConfirmed] = useState(false);
-    const [errorMsg, setErrorMsg] = useState(null);
+    const [delMsg, setDelMsg] = useState("deleting...");
 
     const date = new Date(appointment.time * 1000);
     const dateObj = {
@@ -31,12 +32,29 @@ export default function Appointment(props){
     
     function editAppt(id){
         setEditing(true);
-        props.apptFuncs[1](id);//passing in id temorarily, will pass in new appointment object later
     }
 
-    function delAppt(id){
-        setDeletePrompt(true);
-        props.apptFuncs[0](id);
+    function deleteAppointment(){
+        console.log(`deleting ${appointment.id} ...`)
+        axios.delete('api/v1/deleteAppointment', {params: {appointment_id: appointment.id}})
+        .then(res => {
+          console.log(res.data);
+          if(res.status == 200)
+          {
+            setInterval(() => {
+                setDelMsg("...deleted!")
+            }, 1000);
+
+            setInterval(() => {
+                setDeleteSuccess(true);
+                setDeletePrompt(false);
+            }, 1500);
+          }
+        })
+        .catch(err => {
+            console.log(err);
+            }
+        );
     }
     
     function handleDateChange(e){
@@ -51,13 +69,12 @@ export default function Appointment(props){
         e.preventDefault();
         setEditing(false);
         console.log("confirm edit");
-        //props.apptFuncs[1](appointment.id);
     }
 
     function handleDeleteConfirm(e){
         e.preventDefault();
         setDeleteConfirmed(true);
-        props.apptFuncs[0](appointment.id,setDeleteSuccess);
+        deleteAppointment();
     }
 
     function handleDeleteCancel(e){
@@ -69,10 +86,10 @@ export default function Appointment(props){
     useEffect(() => {
         if(deleteSuccess){
             setDeletePrompt(false);
-            setDeleteConfirmed(false);
+            props.scrollTo(undefined);
+            props.setUpdate(prevBool => !prevBool)
         }
     }, [deleteSuccess]);
-
 
     return (
         <div className={`appointment ${editing && "flex-col-wrap"}`}>
@@ -87,7 +104,7 @@ export default function Appointment(props){
                     {
                     !deleteConfirmed ?
                     <h5 className="noticeHeading">Delete this appointment?</h5>
-                    : <div className="noticeHeadingDeleting"><h5>Deleting...</h5></div>
+                    : <div className="noticeHeadingDeleting"><h5>{delMsg}</h5></div>
                     }
                     {!deleteConfirmed && <div className="deleteBtns">
                         <button onClick={handleDeleteConfirm} className="deleteConfirm" type="submit">delete</button>
@@ -107,7 +124,7 @@ export default function Appointment(props){
             </div>}
             {appointment.customer != null && !editing && <div className="appointmentButtons">
                 <button className="apptBtns" onClick={() => editAppt(appointment.id)}>Edit</button>
-                <button className="apptBtns" onClick={() => delAppt(appointment.id)}>Delete</button>
+                <button className="apptBtns" onClick={() => setDeletePrompt(true)}>Delete</button>
             </div>}
         </div>
     )

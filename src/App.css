@@ -11,6 +11,10 @@
 }
 
 .App {
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  width:70vw;
   position: relative;
 }
 
@@ -58,21 +62,22 @@
 }
 
 .futureAppointments{
-  margin: 0 auto;
+  /* margin: 0 auto; */
   width:80vw;
   max-width: 600px;
   min-width:250px;
-}
 
+}
 
 .appointments {
   display:flex;
+  flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
   margin: 2rem auto 1rem auto;
-  height: 59vh;
+  height: 58vh;
   min-height:200px;
-  overflow: scroll;
+  overflow-y: scroll;
   border-top: 3px solid rgba(255, 134, 21, 0.88);
   border-bottom: 3px solid rgba(255, 134, 21, 0.88);
 }
@@ -86,11 +91,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
   padding: 0 0rem;  
+  align-self:stretch;
   position: relative;
   border-bottom: 1;
   margin-top:2rem;
+  flex-basis: 100%;
 }
 
 .weekHeading {
@@ -98,8 +104,11 @@
   background-color: rgba(134, 134, 134, 0.1);
   padding: 1rem;
   margin-bottom:1rem;
-  width: 100%;
+  align-self: stretch;
+  flex-basis:100%;
   border: 2px solid rgba(255, 255, 255, 0.4);
+  border-left: none;
+  border-right: none;
 }
 
 .dailyAppointments {
@@ -962,4 +971,163 @@ abbr:hover{
   /* background-color: rgb(0, 169, 172) !important; */
   color: white;
   z-index: 9;
+}
+
+.issuesButton {
+  position:absolute;
+  top:-2rem;
+  left:calc(50% - 35px);
+  background-color: white;
+  padding:10px;
+  border-radius: 5px;
+  cursor: pointer;
+  color: red;
+  font-size: 1rem;
+  font-weight: bold;
+  z-index: 11;
+  width:auto;
+}
+
+.issuesActive {
+  background-color: red;
+  color: white;
+}
+
+.issues {
+  position:absolute;
+  height:90vh; /* same as height of App */
+  width:95vw;
+  background-color: rgba(0,0,0,0.9);
+  z-index: 10;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding-top:3rem;
+  overflow-y: scroll;
+}
+
+.issues::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+.issueList {
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* height:100%; */
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+}
+
+
+.issueList::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+.issuesHeading{
+  width:100%;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: orangered;
+  margin-bottom: 1rem;
+}
+.issueNum{
+  text-decoration: underline;
+}
+
+.issue {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding:1rem;
+  width:90%;
+  /* background-color: rgba(255, 134, 21, 0.5); */
+}
+
+.terminateIssueBtn {
+  position:absolute;
+  right:10px;
+  top:10px;
+  width:22px;
+  height:22px;
+  font-weight: bold;
+  background-color: rgb(53, 53, 53);
+  color:orangered;
+}
+
+.issue > h3 {
+  text-decoration: underline;
+  margin-bottom:0.5rem;
+}
+
+.issue:nth-of-type(odd) {
+  background-color: rgba(255, 134, 21, 0.2);
+}
+
+.newIssue{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width:80%;
+  max-width: 90%;
+  /* background-color: rgba(255, 134, 21, 0.5); */
+}
+
+.newIssueForm {
+  display: flex;
+  flex-direction: column;
+  width:80%;
+  max-width: 90%;
+}
+
+.issueTitle{
+  text-align: center;
+  margin-top: 1rem;
+  max-width: 100%;
+  background-color: white;;
+  color: orangered;
+  font-weight: bold;
+  border-radius: 5px;
+  padding: 0.3rem 0;
+  border:none;
+}
+.issueText{
+  border:none;
+  padding: 0.3rem;
+  margin-top: 1rem;
+  max-width: 100%;
+  background-color: white;;
+  color: black;
+  font-weight: bold;
+  border-radius: 5px;
+}
+
+.issueTitle:active, .issueTitle:focus, .issueText:active, .issueText:focus {
+  outline: none;
+}
+
+.issueSubmitBtn {
+  margin-top: 1rem;
+  width: 100px;
+  background-color: rgba(255, 255,255,1);
+  color: orangered;
+  font-weight: bold;
+  padding: 0.5rem;
+  border-radius: 5px;
+  cursor: pointer;
+  outline:none;
+  outline:2px dotted white;
+  border:none;
+}
+.issueSubmitBtn:hover{
+  color:black;
 }

@@ -1,4 +1,5 @@
 import {useState, useEffect} from "react";
+import { nanoid } from "nanoid";
 import DailyAppointments from "./AppointmentsDay";
 
 export default function WeeklyAppointments(props){
@@ -12,7 +13,7 @@ export default function WeeklyAppointments(props){
         weeklyHeadline = `${props.weekStart.getDate()}.${props.weekStart.getMonth()+1}.${props.weekStart.getFullYear()} - ${props.weekEnd.getDate()}.${props.weekEnd.getMonth()+1}.${props.weekEnd.getFullYear()}`;`${props.weekStart.getDate()}.${props.weekStart.getMonth()+1}.${props.weekStart.getFullYear().toString().slice(2)} - ${props.weekEnd.getDate()}.${props.weekEnd.getMonth()+1}.${props.weekEnd.getFullYear().toString().slice(2)}`;
     }
     return (
-        <div className="weeklyAppointments" id={`week_${props.weekNum}`}>
+        <div className="weeklyAppointments" id={`week_${props.weekNum}_${nanoid()}`}>
             <h3 className="weekHeading">{weeklyHeadline}</h3>
             {fullWeek.map((day, index) => {
                 let tempDate = new Date(dayDate);
@@ -24,8 +25,8 @@ export default function WeeklyAppointments(props){
                     scrollTo={props.scrollTo} 
                     day={day} 
                     key={index}
-                    id={`week_${props.weekNum}_day_${index}`}
-                    apptFuncs = {props.apptFuncs}
+                    id={`week_${props.weekNum}_day_${index}_${nanoid()}`}
+                    setUpdate={props.setUpdate}
                     />
                 return tempComp
            })}

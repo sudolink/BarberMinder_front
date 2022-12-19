@@ -7,7 +7,7 @@ export default function FutureAppointments(props){
     const [isLoading, setIsLoading] = useState(true);
     const [todayDate, setTodayDate] = useState(new Date());
     const [scrollTo, setScrollTo] = useState(undefined);
-    const [update, setUpdate] = useState(() => {return props.update});
+    const [updateAppts, setUpdateAppts] = useState(true);
 
     useEffect(() => {
         setIsLoading(true);
@@ -17,7 +17,7 @@ export default function FutureAppointments(props){
             setIsLoading(false);
         })
         .catch(err => console.log(err))
-    }, [update])
+    }, [updateAppts])
 
     useEffect(() => {
         if(scrollTo != undefined){
@@ -73,9 +73,9 @@ export default function FutureAppointments(props){
                         todayDate={todayDate} 
                         weekStart={week}
                         weekEnd={tempWeekEnd}
-                        scrollTo={scrollToWrapper}
+                        scrollTo={setScrollTo}
                         weekNum={index}
-                        apptFuncs = {props.apptFuncs}
+                        setUpdate={setUpdateAppts}
                         key={index}/>
                 })}
             </div>
