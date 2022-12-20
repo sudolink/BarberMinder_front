@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import WeeklyAppointments from "./AppointmentsWeek";
+const API_URL = import.meta.env.VITE_BACKEND_URL;
 
 export default function FutureAppointments(props){
     const [appointments, setAppointments] = useState([]);
@@ -11,7 +12,7 @@ export default function FutureAppointments(props){
 
     useEffect(() => {
         setIsLoading(true);
-        axios.get("/api/v1/getAppointments", {params: {timestamp: Math.floor(todayDate.getTime()/1000)}}) // Math.round to get rid of the milliseconds trailing the . after division
+        axios.get(`${API_URL}`+"/api/v1/getAppointments", {params: {timestamp: Math.floor(todayDate.getTime()/1000)}}) // Math.round to get rid of the milliseconds trailing the . after division
         .then(res => {
             setAppointments(res.data);
             setIsLoading(false);

@@ -10,6 +10,7 @@ import NewAppointment from "./components/NewAppointment";
 import FutureAppointments from "./components/FutureAppointments";
 import Issues from "./components/Issues";
 
+const API_URL = import.meta.env.VITE_BACKEND_URL;
 
 function App() {
   const [showIssues, setShowIssues] = useState(false);
@@ -18,7 +19,7 @@ function App() {
   const [appointmentStored, setAppointmentStored] = useState(false);
 
   function appointmentToDatabase(appointmentObj){
-    axios.post('api/v1/makeAppointment',{},{params: {timestamp: appointmentObj.timestamp, customer_id: appointmentObj.customer_id}})
+    axios.post(`${API_URL}`+'/api/v1/makeAppointment',{},{params: {timestamp: appointmentObj.timestamp, customer_id: appointmentObj.customer_id}})
     .then(res => {
       console.log(res.data);
       if(res.status == 200)
@@ -52,7 +53,7 @@ function App() {
   return (
     <div className="App">
       {showIssues && <Issues/>}
-      <button onClick={() => setShowIssues(!showIssues)} className="issuesButton">Issues</button>
+      <button onClick={() => setShowIssues(!showIssues)} className="issuesButton">{showIssues ? "close" : "Issues" }</button>
       <h1><span className="emphasis">B</span>arber<span className="emphasis">m</span>inder</h1>
       <div className={`toolbar`}>
         <div className="setAppointmentTime">

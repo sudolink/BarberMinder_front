@@ -1,5 +1,6 @@
 import { useState,useEffect } from 'react';
 import axios from "axios";
+const API_URL = import.meta.env.VITE_BACKEND_URL;
 //example of an incoming appointment object:
 // {
 //     "time": 1671058500,
@@ -36,7 +37,7 @@ export default function Appointment(props){
 
     function deleteAppointment(){
         console.log(`deleting ${appointment.id} ...`)
-        axios.delete('api/v1/deleteAppointment', {params: {appointment_id: appointment.id}})
+        axios.delete(`${API_URL}`+'/api/v1/deleteAppointment', {params: {appointment_id: appointment.id}})
         .then(res => {
           console.log(res.data);
           if(res.status == 200)

@@ -974,13 +974,15 @@ abbr:hover{
 }
 
 .issuesButton {
-  position:absolute;
-  top:-2rem;
-  left:calc(50% - 35px);
+  position:fixed;
+  top:0;
+  /* left:calc(50% - 35px); */
+  left:0;
   background-color: white;
   padding:10px;
   border-radius: 5px;
   cursor: pointer;
+  min-width:80px;
   color: red;
   font-size: 1rem;
   font-weight: bold;
@@ -1021,6 +1023,7 @@ abbr:hover{
   /* height:100%; */
   overflow-y: scroll;
   scroll-behavior: smooth;
+  flex-basis: 100%;
 }
 
 
@@ -1103,6 +1106,7 @@ abbr:hover{
 .issueText{
   border:none;
   padding: 0.3rem;
+  text-align: center;
   margin-top: 1rem;
   max-width: 100%;
   background-color: white;;

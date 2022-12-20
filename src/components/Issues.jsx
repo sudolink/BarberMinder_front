@@ -1,6 +1,6 @@
 import {useState, useEffect} from "react";
 import axios from "axios";
-
+const API_URL = import.meta.env.VITE_BACKEND_URL;
 export default function Issues(props){
     const [issueList, setIssueList] = useState([]);
     const [issueListLoaded, setIssueListLoaded] = useState(false);
@@ -12,7 +12,7 @@ export default function Issues(props){
     const [refreshIssues, setRefreshIssues] = useState(false);
 
     useEffect(() => {
-        axios.get('api/v1/allIssues')
+        axios.get(`${API_URL}`+'/api/v1/allIssues')
         .then(res => {
             if(res.status == 200)
             {
@@ -33,7 +33,7 @@ export default function Issues(props){
 
     function handleClick(){
         console.log("submit issue");
-        axios.post('api/v1/newIssue',newIssue)
+        axios.post(`${API_URL}`+'/api/v1/newIssue',newIssue)
         .then(res => {
             console.log(res.data);
             if(res.status == 200)
@@ -47,7 +47,7 @@ export default function Issues(props){
     }
 
     function terminateIssue(issue){
-        axios.delete('api/v1/deleteIssue', {params: {issue_id: issue.issue_id}})
+        axios.delete(`${API_URL}`+'/api/v1/deleteIssue', {params: {issue_id: issue.issue_id}})
         .then(res => {
             console.log(res.data);
             if(res.status == 200)

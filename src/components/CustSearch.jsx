@@ -1,5 +1,6 @@
 import axios from "axios";
 import {useState, useRef, useEffect} from "react";
+const API_URL = import.meta.env.VITE_BACKEND_URL;
 
 export default function CustSearch(props){
     const [search, setSearch] = useState("");
@@ -30,7 +31,7 @@ export default function CustSearch(props){
             timeoutId.current = setTimeout(() => {
                 // Call the API here
                 if(search.length > 0){
-                    axios.get(`/api/v1/getCustomerLike/`, {params: {name: search}})
+                    axios.get(`${API_URL}/api/v1/getCustomerLike/`, {params: {name: search}})
                     .then(res => {
                         if(res.data.length > 5){
                             setResults(res.data.slice(0, 5))
