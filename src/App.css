@@ -79,8 +79,8 @@
   height: 58vh;
   min-height:200px;
   overflow-y: scroll;
-  border-top: 3px solid rgba(255, 134, 21, 0.88);
-  border-bottom: 3px solid rgba(255, 134, 21, 0.88);
+  /* border-top: 3px solid rgba(255, 134, 21, 0.88);
+  border-bottom: 3px solid rgba(255, 134, 21, 0.88); */
 }
 .appointments::-webkit-scrollbar {
   width: 0;
@@ -144,13 +144,16 @@
 
 .dhText{
   font-size: 0.5rem;
-  color: rgba(255,255,255,0.2);
+  /* color: rgba(255,255,255,0.2); */
+  color: rgba(151, 7, 72, 0.733);
   margin-right:auto;
 }
 
 .dhday {
   font-size: 0.7rem;
-  color: rgba(255,255,255,0.2);
+  /* color: rgba(255,255,255,0.2); */
+  /* color: rgba(151, 7, 72, 0.733); */
+  color:rgba(55,55,55,0.5);
   margin-right: 1rem;
 }
 
@@ -167,7 +170,10 @@
   z-index: 1;
 }
 .dayHeadingOverlay:hover{
-  background-color: rgba(255, 255, 255, 0.3);
+  /* background-color: rgba(255, 255, 255, 0.3); */
+  background-color: rgba(55,55,55,0.2);
+  border-bottom: 1px dotted #970747;
+  border-top: 1px dotted #970747;
   cursor: pointer;
 }
 
@@ -347,7 +353,8 @@
 
 .numberOfAppointmentsX{
   margin-left:0.2rem;
-  color:white;
+  /* color:white; */
+  color:rgb(53, 53, 53);
 }
 
 .appointmentDetails {
@@ -370,7 +377,7 @@
 .resetCustomerBtnImg {
   height:1.4rem;
   width:1.4rem;
-  filter: invert(1);
+  filter: invert(0);
   animation: rotateCCWise 4s ease-in-out infinite;
 }
 
@@ -420,10 +427,11 @@
 
 .setAppointmentTime{
   border-radius:1rem;
-  background-color: pink;
+  background-color: transparent;
   height:40px;
   width:240px;
   overflow: hidden;
+  /* outline: 2px solid rgb(55,55,55); */
 }
 
 .pickerLogos {
@@ -449,6 +457,7 @@
 .activeMode {
   color: #970747;
   /* background-color: rgba(255, 134, 21, 0.88); */
+  background-color: rgba(151, 7, 72,1);
 }
 
 .customerForm {
@@ -479,16 +488,16 @@
   position:absolute;
   background: transparent;
   border: none;
-  color:white;
   font-size: 0.8rem;
   cursor: pointer;
   right:0;
   margin: 0.5rem 0;
+  color: #970747;
 }
 
 .customerModeBtn:hover{
   /* color:rgba(255, 134, 21, 1); */
-  color: #970747;
+  color:rgb(50,50,50);
 }
 
 @keyframes pulsate {
@@ -577,7 +586,8 @@ abbr:hover{
 }
 
 .emphasisOrange {
-  color: rgba(255, 134, 21, 0.88);
+  color:rgba(151, 7, 72,1);
+  /* color: rgba(255, 134, 21, 0.88); */
 }
 
 .emphasis {
@@ -648,7 +658,7 @@ abbr:hover{
 }
 
 .selectedDay{
-  color:orange;
+  /* color:orange; */
 }
 
 @keyframes textGrow {
@@ -842,18 +852,19 @@ abbr:hover{
 }
 
 .resultButtons {
-  color:white;
+  color:rgb(50,50,50);
   margin: 0.2rem;
   background-color: transparent;
   border: 1px solid transparent;
-  border-bottom: 0.01rem solid rgba(255,255,255,0.1);
+  border-radius:3px;
   cursor: pointer;
   width:100px;
 }
 
 .resultButtons:hover {
-  border-bottom: 1px solid rgba(255,255,255,0.6);
-  color: rgba(255, 134, 21, 1) !important;
+  border-bottom: 1px solid #970747;
+  /* color: rgba(255, 134, 21, 1) !important; */
+  color:#970747;
 }
 
 .customerName {
@@ -863,7 +874,7 @@ abbr:hover{
 .results {
   margin-top:0.5rem;
   padding:1rem;
-  text-shadow: 0 0 50px white;
+  text-shadow: 0 0 50px rgb(50,50,50);
 }
 
 .enlarge {
