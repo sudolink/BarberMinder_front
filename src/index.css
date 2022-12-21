@@ -76,9 +76,9 @@ h1 {
 }
 
 @media (prefers-color-scheme: light) {
-  /* :root {
+  :root {
     color: #213547;
-    background-color: #ffffff;
+    background-color: #fef5ea;
   }
 
   a:hover {
@@ -86,6 +86,6 @@ h1 {
   }
 
   button {
-    background-color: #f9f9f9;
-  } */
+    background-color: #213547;
+  }
 }

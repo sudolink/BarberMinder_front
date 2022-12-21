@@ -56,7 +56,8 @@
 
 .appointmentsHeading {
   font-size: 1.5rem;
-  color: rgba(255, 134, 21, 1);
+  /* color: rgba(255, 134, 21, 1); */
+  color:rgb(53, 53, 53);
   text-decoration: underline;
   margin: 0rem 0.4rem;
 }
@@ -283,8 +284,8 @@
 }
 
 .appointmentDate{
-
-  color:orange;
+  color:#970747;
+  /* color:orange; */
   margin: 0 1rem;
 }
 
@@ -340,7 +341,8 @@
 }
 
 .numberOfAppointments {
-  color: rgba(255, 134, 21, 1);
+  color:#970747;
+  /* color: rgba(255, 134, 21, 1); */
 }
 
 .numberOfAppointmentsX{
@@ -388,7 +390,8 @@
   /* make a fat juicy button */
   border-radius: 0.5rem;
   border: none;
-  background-color: rgba(255, 134, 21, 0.88);
+  /* background-color: rgba(255, 134, 21, 0.88); */
+  background-color: #970747;;
   color: white;
   padding: 0.7rem 1.2rem;
   font-size: 1rem;
@@ -397,13 +400,14 @@
 }
 
 .confirmAppointmentBtn:hover {
-  background-color: rgba(255, 134, 21, 1);
+  /* background-color: rgba(255, 134, 21, 1); */
+  background-color: #970747;;
   color:black;
 }
 
 .dateSelectedSpan{
   font-size: 1.2rem;
-  color:rgba(255,255,255,1) !important;
+  color: rgb(50,50,50) !important;
   margin: 0rem 0.4rem;
 }
 
@@ -443,8 +447,8 @@
 }
 
 .activeMode {
-  background-color: rgba(255, 134, 21, 0.88);
-  color: white;
+  color: #970747;
+  /* background-color: rgba(255, 134, 21, 0.88); */
 }
 
 .customerForm {
@@ -466,7 +470,8 @@
 }
 
 .searchInput:focus {
-  outline: 1px solid rgba(255, 134, 21, 0.88);
+  /* outline: 1px solid rgba(255, 134, 21, 0.88); */
+  outline: 1px solid #970747;
   animation: pulsate 3s ease-in infinite;
 }
 
@@ -482,21 +487,22 @@
 }
 
 .customerModeBtn:hover{
-  color:rgba(255, 134, 21, 1);
+  /* color:rgba(255, 134, 21, 1); */
+  color: #970747;
 }
 
 @keyframes pulsate {
   0% {
-    outline: 2px solid rgba(255, 134, 21, 0.7);
+    outline: 2px solid #970747;
   }
   25% {
-    outline: 2px solid rgba(255, 134, 21, 0.7);
+    outline: 2px solid #970747;
   }
   50% {
     outline: 2px solid rgba(21, 251, 255, 0);
   }
   100% {
-    outline: 2px solid rgba(255, 134, 21, 0.7);
+    outline: 2px solid #970747;
   }
 }
 
@@ -509,13 +515,15 @@
 .react-calendar {
   position: relative;
   border-radius: 0.5rem;
-  border: 2px solid rgba(255, 134, 21, 1);
+  /* border: 2px solid rgba(255, 134, 21, 1); */
+  border: 2px solid #970747;
   overflow: hidden;
   margin-top: 1rem;
 }
 
 .react-calendar__navigation {
-  background-color: rgba(255, 134, 21, 0.88);
+  /* background-color: rgba(255, 134, 21, 0.88); */
+  background-color: 2px solid #970747;
   display:flex;
   align-items: center;
 }
@@ -573,7 +581,7 @@ abbr:hover{
 }
 
 .emphasis {
-  color: rgba(21, 251, 255, 0.88);
+  /* color: rgba(21, 251, 255, 0.88); */
 }
 
 .cContainer {
@@ -581,11 +589,13 @@ abbr:hover{
 }
 
 .highlight {
-  color:rgba(255, 134, 21, 1);
+  color: #970747;
+  /* color:rgba(255, 134, 21, 1); */
 }
 
 .searchHighlight {
-  color: rgba(255, 134, 21, 1);
+  /* color: rgba(255, 134, 21, 1); */
+  color: #970747;
   font-weight: bold;
 }
 
@@ -656,13 +666,13 @@ abbr:hover{
 
 @keyframes flashText {
   0% {
-    color:rgba(255, 134, 21, 0.88);
+    color:#970747;
   }
   30% {
     color:rgba(255,255,255,1)
   }
   60%{
-    color:rgba(255,134,21,0.88);
+    color:#970747;
   }
   90%{
     color:rgba(255,255,255,1)
@@ -681,7 +691,7 @@ abbr:hover{
   width:330px;
   border-radius: 50%;
   position:relative;
-  background-color: rgba(56, 56, 56, 1);
+  /* background-color: rgba(56, 56, 56, 1); */
 }
 
 .smallRing {
@@ -691,7 +701,7 @@ abbr:hover{
   border-radius: 50%;
   height:180px;
   width:180px;
-  background-color: rgba(255,255,255,0.1);
+  /* background-color: rgba(255,255,255,0.1); */
   display:flex;
   justify-content: center;
   align-items: center;
@@ -706,6 +716,7 @@ abbr:hover{
 
 .hourDiv:hover{
   color:white;
+  background-color: #970747;
 }
 
 .hourText{
@@ -740,7 +751,8 @@ abbr:hover{
 }
 
 .innerCirc:hover {
-  background-color: rgba(24, 140, 142, 1);
+  /* background-color: rgba(24, 140, 142, 1); */
+  background-color: #9505467c;
 }
 
 .innerCircMinutes {
@@ -751,7 +763,8 @@ abbr:hover{
   height:40px;
 }
 .innerCircMinutes:hover{
-  background-color: rgba(24, 140, 142, 1);
+  /* background-color: rgba(24, 140, 142, 1); */
+  background-color: #9505467c;
 }
 
 .timeBox{
@@ -764,7 +777,8 @@ abbr:hover{
   font-size: 2.4rem;
   font-weight:700;
   /* color:rgba(21, 251, 255, 1); */
-  color: rgba(255, 134, 21, 1);
+  /* color: rgba(255, 134, 21, 1); */
+  color: #970747;
   -webkit-animation: breathing 3s ease-out infinite normal;
   animation: breathing 3s ease-in-out infinite normal;
   text-shadow: 0 0 50px white;
@@ -772,7 +786,8 @@ abbr:hover{
 
 .confirmClockText {
   font-size: 1.6rem;
-  color:rgba(255, 134, 21, 1);
+  /* color:rgba(255, 134, 21, 1); */
+  color: #970747;
   text-shadow: 0 0 30px white;
 }
 .confirmClockText:hover{
@@ -967,8 +982,9 @@ abbr:hover{
 }
 
 .selectedBubble {
-  background-color: rgba(255, 134, 21, 1) !important;
+  /* background-color: rgba(255, 134, 21, 1) !important; */
   /* background-color: rgb(0, 169, 172) !important; */
+  background-color: #970747;
   color: white;
   z-index: 9;
 }
